@@ -34,51 +34,51 @@ public class API {
         cb = new CoinbaseBuilder().build();
     }
 
-    public void login(final Context context){
-        try {
-            OAuth.beginAuthorization(context, CLIENT_ID, "user", REDIRECT_URI, null);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    public void completAuth(final Context context, Intent intent){
-        new CompleteAuthorizationTask(context, intent);
-    }
+//    public void login(final Context context){
+//        try {
+//            OAuth.beginAuthorization(context, CLIENT_ID, "user", REDIRECT_URI, null);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
+//    public void completAuth( Context context, Intent intent){
+//        new CompleteAuthorizationTask(context, intent).execute();
+//    }
 
-    public class CompleteAuthorizationTask extends AsyncTask<Intent, String, OAuthTokensResponse> {
-        Context context;
-        private Intent mIntent;
-
-        public CompleteAuthorizationTask(Context c, Intent intent){
-            this.context = c;
-            this.mIntent = intent;
-        }
-        @Override
-        protected OAuthTokensResponse doInBackground(Intent... intents) {
-            //Log.d(TAG, "doInBackground AUTH");
-            try {
-                return OAuth.completeAuthorization(context, CLIENT_ID,
-                        CLIENT_SECRET, mIntent.getData());
-            } catch (UnauthorizedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(OAuthTokensResponse oAuthTokensResponse) {
-            super.onPostExecute(oAuthTokensResponse);
-            Log.d(TAG, "Post Called");
-        }
-
-        @Override
-        protected void onPreExecute() {
-            Log.d(TAG, "Pre Called");
-        }
-    }
+//    public class CompleteAuthorizationTask extends AsyncTask<Intent, String, OAuthTokensResponse> {
+//        Context context;
+//        private Intent mIntent;
+//
+//        public CompleteAuthorizationTask(Context c, Intent intent){
+//            this.context = c;
+//            this.mIntent = intent;
+//        }
+//        @Override
+//        protected OAuthTokensResponse doInBackground(Intent... intents) {
+//            //Log.d(TAG, "doInBackground AUTH");
+//            try {
+//                return OAuth.completeAuthorization(context, CLIENT_ID,
+//                        CLIENT_SECRET, mIntent.getData());
+//            } catch (UnauthorizedException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(OAuthTokensResponse oAuthTokensResponse) {
+//            super.onPostExecute(oAuthTokensResponse);
+//            Log.d(TAG, "Post Called");
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            Log.d(TAG, "Pre Called");
+//        }
+//    }
 //test
 
 
