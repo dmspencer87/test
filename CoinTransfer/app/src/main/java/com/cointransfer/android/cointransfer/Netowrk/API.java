@@ -24,15 +24,15 @@ import static android.content.ContentValues.TAG;
 public class API {
     private static final String CLIENT_ID = "906c34540b7a5a3f54c0c723e06aa5b34a9b6953e46032d2829653fc01e478d0";
     private static final String CLIENT_SECRET = "99d451f9a320f6a90234ad06062e67f079956f892120e33b8663f8de8d1afee0";
-    private static final String REDIRECT_URI = "bwallet://coinbase-oauth";
+    private static final String REDIRECT_URI = "cointransfer://coinbase-oauth";
 
     private static Coinbase cb;
 
     private static API api = new API();
 
-    public API() {
-        cb = new CoinbaseBuilder().build();
-    }
+//    public API() {
+//        cb = new CoinbaseBuilder().build();
+//    }
 
 //    public void login(final Context context){
 //        try {

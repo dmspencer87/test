@@ -17,7 +17,6 @@ import com.cointransfer.android.cointransfer.Netowrk.API;
 import com.cointransfer.android.cointransfer.R;
 
 import java.io.IOException;
-import java.net.URI;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,14 +27,23 @@ public class MainActivity extends AppCompatActivity {
     API testApi;
     private static final String CLIENT_ID = "906c34540b7a5a3f54c0c723e06aa5b34a9b6953e46032d2829653fc01e478d0";
     private static final String CLIENT_SECRET = "99d451f9a320f6a90234ad06062e67f079956f892120e33b8663f8de8d1afee0";
-    private static final String REDIRECT_URI = "bwallet://coinbase-oauth";
+    private static final String REDIRECT_URI = "cointransfer://coinbase-oauth";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
+
+    }
+    public void handleIntent(Intent intent) {
+        Log.d(TAG, "Test");
+        if(intent != null && intent.getAction() != null) {
+            if(intent.getAction().equals("android.intent.action.VIEW")) {
+                Log.d(TAG, "COMPLETE AUTH");
+                new CompleteAuthorizationTask(intent.getData()).execute();
+            }
+        }
     }
 
     private void init(){
@@ -48,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 login();
             }
         });
+        //handleIntent(getIntent());
 
     }
     public void login(){
@@ -61,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onNewIntent(Intent intent) {
+    protected void onNewIntent(final Intent intent) {
         if (intent != null && intent.getAction() != null && intent.getAction().equals("android.intent.action.VIEW")) {
-            new CompleteAuthorizationTask(intent.getData()).execute();
+            Log.d(TAG, "COMPLETE AUasdfafeadfaefadsfaefadfaefadsfaefasdfeafsafeafTH");
+            handleIntent(intent);
         }
     }
     public class CompleteAuthorizationTask extends AsyncTask<Intent, String, OAuthTokensResponse> {
@@ -101,5 +111,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onPreExecute AUTH");
         }
     }
+
 
 }
