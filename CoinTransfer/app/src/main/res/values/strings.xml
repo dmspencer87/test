@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CoinTransfer</string>
+    <string name="login_screen">Auth2 LOGIN</string>
+    <string name="login_button">LOGIN</string>
+</resources>
