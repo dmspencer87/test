@@ -1,4 +1,4 @@
-package com.cointransfer.android.cointransfer;
+package com.cointransfer.android.coinexchange;
 
 import org.junit.Test;
 
