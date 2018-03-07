@@ -208,7 +208,6 @@ public class CoinBaseApi {
             @Override
             public void subscribe(ObservableEmitter<Transaction> e) throws Exception {
 
-//                Coinbase c = new CoinbaseBuilder().withApiKey("NTdermhFkXQnY1RK", "OKfFWDutA9uQ9LNF1HdezNGSvVnFUMyE").build();
                 Transaction trans = new Transaction();
 
                 trans.setTo("daniel.spencer87@yahoo.com");
