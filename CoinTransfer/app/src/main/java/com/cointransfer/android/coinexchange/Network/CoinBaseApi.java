@@ -124,6 +124,7 @@ public class CoinBaseApi {
     public void login(final Context context) {
         try {
             OAuth.beginAuthorization(context, CLIENT_ID, "user", REDIRECT_URI, null);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -208,13 +209,13 @@ public class CoinBaseApi {
             @Override
             public void subscribe(ObservableEmitter<Transaction> e) throws Exception {
 
-                Transaction trans = new Transaction();
-
-                trans.setTo("daniel.spencer87@yahoo.com");
-                trans.setAmount(Money.parse("BTC 0.0004"));
-                trans.setNotes("TESTING");
-                Transaction r = cb.sendMoney(trans);
-                e.onNext(r);
+//                Transaction trans = new Transaction();
+//
+//                trans.setTo("daniel.spencer87@yahoo.com");
+//                trans.setAmount(Money.parse("BTC 0.0004"));
+//                trans.setNotes("TESTING");
+//                Transaction r = cb.sendMoney(trans);
+//                e.onNext(r);
             }
         }));
     }

@@ -21,6 +21,8 @@ import com.coinbase.api.entity.OAuthTokensResponse;
 import com.cointransfer.android.coinexchange.Network.CoinBaseApi;
 import com.cointransfer.android.coinexchange.Network.QRDialogFragment;
 import com.cointransfer.android.coinexchange.Network.SharedData;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import static android.content.ContentValues.TAG;
 
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements SharedData{
     private TextView getEmail;
     private TextView getAmount;
     private TextView getNote;
+    private Button appLogout;
 
 
     CoinBaseApi api;
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements SharedData{
         getNote = (TextView) findViewById(R.id.getNote);
         bSend = (Button) findViewById(R.id.sentBTC);
         qScanner = (Button) findViewById(R.id.qr_scanner);
+        appLogout = (Button) findViewById(R.id.logout);
 
 
 
@@ -96,11 +100,40 @@ public class MainActivity extends AppCompatActivity implements SharedData{
         qScanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BottomSheetDialogFragment dialog = new QRDialogFragment();
-                dialog.show(getSupportFragmentManager(), "Action");
+//                BottomSheetDialogFragment dialog = new QRDialogFragment();
+//                dialog.show(getSupportFragmentManager(), "Action");
+                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+                integrator.setPrompt("Scan a QRcode");
+                integrator.setOrientationLocked(false);
+                integrator.initiateScan();
+
 
             }
         });
+        appLogout.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        }));
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+
+                send_email.setText(result.getContents().replace("bitcoin:", ""));
+                //tvScanFormat.setText(result.getFormatName());
+
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -163,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements SharedData{
             getAmount.setVisibility(View.VISIBLE);
             bSend.setVisibility(View.VISIBLE);
             qScanner.setVisibility(View.VISIBLE);
+            appLogout.setVisibility(View.VISIBLE);
         }
     }
 
